@@ -50,7 +50,7 @@ python src/focus_lock.py
 2. **Calibrate** before first use:
    - Click "Calibrate" button
    - System will move piezo through 10 steps of 60 nm
-   - Linear calibration curve will be displayed
+   - Linear  curve will be displayed
    - Only if Linear relationship is detected continue. If there is no linear relationship adjust optics (consider adding density filter before webca, adjusting HiLO or TIRF illumination angle, centering the beam onto the webcam, etc).
 
 3. **Lock focus**:
@@ -75,18 +75,18 @@ python src/focus_lock.py
   - Eliminates steady-state error
   - Too high → instability
 
-### Calibration
+### 
 
-The system requires calibration before each session to establish the relationship between beam displacement and axial position.
+The system requires  before each session to establish the relationship between beam displacement and axial position.
 
-**Calibration procedure:**
+** procedure:**
 1. Ensure proper illumination and back-reflection
 2. Click "Calibrate"
 3. Wait ~15 seconds for automated routine
-4. Verify linear relationship in calibration plot
+4. Verify linear relationship in  plot
 5. Slope is automatically saved
 
-See [docs/calibration_guide.md](docs/calibration_guide.md) for troubleshooting non-linear calibrations.
+See calibration_guide.md for troubleshooting non-linear calibrations.
 
 ### Data Logging
 
@@ -169,7 +169,7 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
 **Problem**: DLL not found
 - **Solution**: Install Mad City Labs NanoDrive software, verify DLL path
 
-See [docs/user_guide.md](docs/user_guide.md) for detailed troubleshooting.
+See user_guide.md for detailed troubleshooting.
 
 ## Contact
 
