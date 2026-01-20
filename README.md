@@ -120,7 +120,7 @@ The system tracks lateral displacement of back-reflected excitation light to mea
 
 ## Optical Setup
 
-![Optical Setup]<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/3590047f-0f3b-480d-aed4-5e4354686db0" />
+<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/3590047f-0f3b-480d-aed4-5e4354686db0" />
 
 1. Pick-off mirror redirects reflected beam
 2. Lens 1 (Focus beam on Iris)
