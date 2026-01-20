@@ -138,3 +138,46 @@ The system tracks lateral displacement of back-reflected excitation light to mea
 ## Citation
 
 If you use this software in your research, please cite: ...
+
+## Contributing
+
+Contributions welcome! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
+
+## Troubleshooting
+
+### Common Issues
+
+**Problem**: Calibration shows non-linear relationship
+- **Solution**: Adjust HiLO/TIRF angle, verify imaging depth, check for detector saturation
+
+**Problem**: System unlocks frequently
+- **Solution**: Reduce Kp/Ki gains, verify illumination stability, check for vibrations
+
+**Problem**: Large oscillations during lock
+- **Solution**: Reduce Kp gain, ensure proper calibration
+
+**Problem**: Cannot find camera
+- **Solution**: Check USB connection, verify camera index (default 0)
+
+**Problem**: DLL not found
+- **Solution**: Install Mad City Labs NanoDrive software, verify DLL path
+
+See [docs/user_guide.md](docs/user_guide.md) for detailed troubleshooting.
+
+## Contact
+
+Joaquin Garat   
+joagarat@gmail.com
+Departamento de Genómica, Instituto de Investigaciones Biológicas Clemente Estable, Montevideo, Uruguay.
+
+## Acknowledgments
+
+- 
+- 
