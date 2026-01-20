@@ -1,7 +1,4 @@
-# HiLOTIRF_FocusLock
-An open-source, low-cost active focus lock system for fluorescence microscopy, achieving ~8 nm axial stability using back-reflected illumination and PI feedback control.
 # Active Focus Lock System for TIRF and HiLO Microscopy
-
 An open-source, low-cost active focus lock system for fluorescence microscopy, achieving ~8 nm axial stability using back-reflected illumination and PI feedback control.
 
 ![FocusLock](https://github.com/user-attachments/assets/52a0cbe7-8793-4c48-9230-8030fc96b974)
