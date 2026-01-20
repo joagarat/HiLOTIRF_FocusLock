@@ -25,6 +25,8 @@ Calibration establishes the linear relationship between lateral beam displacemen
 
 ## Expected Results
 
+![Calibration curve](https://github.com/user-attachments/assets/61a2d0e6-6d2b-4eac-9c61-76a83ecbae80)
+
 **Good calibration:**
 - Linear fit 
 - Minimal scatter around fit line
