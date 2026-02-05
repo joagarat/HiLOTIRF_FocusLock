@@ -44,7 +44,7 @@ pip install -r requirements.txt
 
 1. Run the software:
 ```bash
-python src/focus_lock.py
+python focus_lock.py
 ```
 
 2. **Calibrate** before first use:
