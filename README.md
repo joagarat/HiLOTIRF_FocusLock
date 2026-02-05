@@ -170,14 +170,3 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
 - **Solution**: Install Mad City Labs NanoDrive software, verify DLL path
 
 See user_guide.md for detailed troubleshooting.
-
-## Contact
-
-Joaquin Garat   
-joagarat@gmail.com
-Departamento de Genómica, Instituto de Investigaciones Biológicas Clemente Estable, Montevideo, Uruguay.
-
-## Acknowledgments
-
-- 
-- 
