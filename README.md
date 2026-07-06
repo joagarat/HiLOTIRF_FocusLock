@@ -47,23 +47,46 @@ pip install -r requirements.txt
 python focus_lock.py
 ```
 
-2. **Calibrate** before first use:
+2. **Select a beam-position detection method** (see [Beam Position Detection Methods] below). The contour centroid method is recommended as the default, as it is the most robust across illumination angles and imaging depths.
+
+3. **Calibrate** before first use (and before every acquisition session):
    - Click "Calibrate" button
    - System will move piezo through 10 steps of 60 nm
-   - Linear  curve will be displayed
-   - Only if Linear relationship is detected continue. If there is no linear relationship adjust optics (consider adding density filter before webca, adjusting HiLO or TIRF illumination angle, centering the beam onto the webcam, etc).
+   - Linear curve will be displayed
+   - Only if a linear relationship is detected continue. If there is no linear relationship, adjust acquisition/detection parameters first (digital gain, gamma correction, binarization threshold), and if that doesn't resolve it, adjust optics (add a neutral density filter before the webcam, adjust the HiLO/TIRF illumination angle, verify imaging depth, center the beam on the webcam, or partially close the iris).
 
-3. **Lock focus**:
+4. **Lock focus**:
    - Adjust Kp and Ki parameters (On our system: Kp=-0.01, Ki=-0.001)
    - Click "Lock Focus"
    - Monitor stability in real-time plot
    - If focus lock is not working consider optimizing Kp and Ki to your system.
 
-4. **Monitor stability**:
+5. **Monitor stability**:
    - Click "Calculate Std Dev" to measure fluctuations
    - Enable "Save Data" to log position over time
 
 ## Usage Guide
+
+### Beam Position Detection Methods
+
+The system supports three alternative methods for estimating the lateral position of the reflected beam on the webcam sensor:
+
+1. **1D Gaussian fitting** – fits a Gaussian profile to a horizontal line profile through the beam center.
+2. **2D Gaussian fitting** – fits a Gaussian to the full 2D beam profile.
+3. **Contour centroid** – computes the beam position as the center of mass of a contour defined by a binary mask.
+
+All three methods give comparable results under optimal conditions and near the coverslip. However, the **contour centroid method is more robust** at larger distances from the coverslip and across different illumination angles, where the reflected beam deviates from an ideal Gaussian profile and its intensity distribution becomes less reliable. For this reason, contour centroid is the recommended default, especially for HiLO acquisitions at varying depths or low signal intensity.
+
+### Camera / Detection Parameters
+
+To optimize beam detection and calibration linearity, the following acquisition/detection parameters are user-adjustable from the GUI:
+
+- **Digital gain** – amplifies the camera signal; useful for low-intensity conditions (e.g., steep HiLO angles), but excessive gain can introduce noise or saturation.
+- **Gamma correction** – adjusts the non-linear response of the recorded intensity; can help linearize the beam profile response.
+- **Binarization threshold** – (used only with the contour centroid method) sets the intensity cutoff for generating the binary mask used to compute the contour; affects the size/shape of the detected contour and therefore the precision of the centroid.
+
+Tuning these parameters is typically the first step when troubleshooting a non-linear calibration curve, before resorting to optical adjustments (see Troubleshooting below).
+
 
 ### PI Controller Parameters
 
@@ -75,7 +98,7 @@ python focus_lock.py
   - Eliminates steady-state error
   - Too high → instability
 
-### 
+### Calibration
 
 The system requires  before each session to establish the relationship between beam displacement and axial position.
 
@@ -102,7 +125,7 @@ The system tracks lateral displacement of back-reflected excitation light to mea
 2. **Signal processing**: 
    - Extract blue channel
    - Gaussian filtering (σ=1 pixel)
-   - Fit Gaussian to beam profile
+   - - Estimate beam position using the selected method: 1D Gaussian fit, 2D Gaussian fit, or contour centroid (binary mask + center of mass)
    - Extract center position
 3. **Averaging**: 20 consecutive measurements averaged per control update
 4. **PI control**: Computed correction applied to piezo Z-position
@@ -110,7 +133,7 @@ The system tracks lateral displacement of back-reflected excitation light to mea
 
 ### Key Parameters
 - Control frequency: 20 Hz
-- Averaging: 20 frames per update
+- Averaging: user-adjustable (typically 20 frames per update)
 - Max correction step: 0.2 μm
 - Max drift before unlock: 15 μm
 - Typical stability: ~8 nm (std dev)
@@ -121,7 +144,7 @@ The system tracks lateral displacement of back-reflected excitation light to mea
 
 1. Pick-off mirror redirects reflected beam
 2. Lens 1 (Focus beam on Iris)
-3. Iris suppresses spurious reflections
+3. Iris suppresses spurious reflections if needed
 4. Lens 2 (Collimates beam after Iris)
 5. Lens 3 (Focus Beam on webcam detector)
 6. Webcam detector images beam spot
@@ -152,13 +175,16 @@ Contributions welcome! Please:
 ### Common Issues
 
 **Problem**: Calibration shows non-linear relationship
-- **Solution**: Adjust HiLO/TIRF angle, verify imaging depth, check for detector saturation
+- **Solution**: First adjust acquisition/detection parameters (digital gain, gamma correction, binarization threshold if using contour centroid). If linearity is not restored, adjust the HiLO/TIRF illumination angle, verify imaging depth is within the objective's working range, attenuate the beam with neutral density filters to avoid detector saturation, or partially close the iris.
 
 **Problem**: System unlocks frequently
 - **Solution**: Reduce Kp/Ki gains, verify illumination stability, check for vibrations
 
 **Problem**: Large oscillations during lock
 - **Solution**: Reduce Kp gain, ensure proper calibration
+
+**Problem**: Contour centroid detection is unstable or noisy
+- **Solution**: Adjust the binarization threshold, check digital gain/gamma settings, and verify the beam is not saturating or too dim on the sensor
 
 **Problem**: Cannot find camera
 - **Solution**: Check USB connection, verify camera index (default 0)
