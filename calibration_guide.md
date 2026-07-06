@@ -15,7 +15,7 @@ Calibration establishes the linear relationship between lateral beam displacemen
    - System automatically:
      - Moves piezo 10 steps of 60 nm
      - Acquires 20 frames per position
-     - Fits Gaussian to each frame
+     - Detects beam position on each frame
      - Averages measurements
 
 3. **Verify calibration**
